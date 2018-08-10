@@ -24,23 +24,42 @@ class Rover
   end
 
   def turn(chirality)
-    if chirality == 'l' && @axis.has_value?(:S)
+    turn_left if chirality == 'l' 
+    turn_right if chirality == 'r' 
+  end
+
+  private
+  
+  def turn_left
+    case @axis[:direction]
+    when :S
       @axis[:direction] = :E
-    elsif chirality == 'l' && @axis.has_value?(:E)
+    when :E
       @axis[:direction] = :N
-    elsif chirality == 'l' && @axis.has_value?(:N)
+    when :N
       @axis[:direction] = :W
-    elsif chirality == 'l' && @axis.has_value?(:W)
+    when :W
       @axis[:direction] = :S
-    elsif chirality == 'r' && @axis.has_value?(:S)
+    else
+      @axis
+    end
+  end
+
+  def turn_right
+    case @axis[:direction]
+    when :S
       @axis[:direction] = :W
-    elsif chirality == 'r' && @axis.has_value?(:W)
+    when :W
       @axis[:direction] = :N
-    elsif chirality == 'r' && @axis.has_value?(:N)
+    when :N
       @axis[:direction] = :E
-    elsif chirality == 'r' && @axis.has_value?(:E)
+    when :E
       @axis[:direction] = :S
+    else
+      @axis
     end
   end
 
 end
+
+
