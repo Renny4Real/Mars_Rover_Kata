@@ -1,52 +1,99 @@
 # frozen_string_literal: true
 
 describe Rover do
-  context 'it can move forwards and backwards' do
-    it 'can return its current position at (O,O)' do
-      rover = Rover.new(0, 0, :S)
-      location = rover.position
+  context 'it can move forwards and backwards', focus: true do
+    context 'along the y - axis' do
+      it 'can return its current position at (O,O) facing south' do
+        rover = Rover.new(0, 0, :S)
+        location = rover.position
 
-      expect(location).to eq(x: 0, y: 0, direction: :S)
+        expect(location).to eq(x: 0, y: 0, direction: :S)
+      end
+
+      it 'can move from (0,0) to (0,1) facing south' do
+        rover = Rover.new(0, 0, :S)
+        rover.move(['f', 1])
+        location = rover.position
+
+        expect(location).to eq(x: 0, y: 1, direction: :S)
+      end
+
+      it 'can move from (0,0) to (0,1) and then to (0,2) facing south' do
+        rover = Rover.new(0, 0, :S)
+        rover.move(['f', 1], ['f', 1])
+        location = rover.position
+
+        expect(location).to eq(x: 0, y: 2, direction: :S)
+      end
+
+      it 'can move from (0,0) to (0,3) facing south' do
+        rover = Rover.new(0, 0, :S)
+        rover.move(['f', 1], ['f', 2])
+        location = rover.position
+
+        expect(location).to eq(x: 0, y: 3, direction: :S)
+      end
+
+      it 'can move from (0,3) back to (0,2) facing north' do
+        rover = Rover.new(0, 0, :S)
+        rover.move(['f', 1], ['f', 2], ['b', 1])
+        rover.turn('l')
+        rover.turn('l')
+        location = rover.position
+
+        expect(location).to eq(x: 0, y: 2, direction: :N)
+      end
+
+      it 'can move from (0,3) back to (0,0)' do
+        rover = Rover.new(0, 0, :S)
+        rover.move(['f', 1], ['f', 1], ['f', 1], ['b', 3])
+        rover.turn('r')
+        location = rover.position
+
+        expect(location).to eq(x: 0, y: 0, direction: :W)
+      end
     end
 
-    it 'can move from (0,0) to (0,1)' do
-      rover = Rover.new(0, 0, :S)
-      rover.move(['f', 1])
-      location = rover.position
+    context 'along the x - axis' do
+      it 'can move from (0,0) to (1,0) facing east' do
+        rover = Rover.new(0, 0, :S)
+        rover.turn('l')
+        rover.move(['f', 1])
+        location = rover.position
 
-      expect(location).to eq(x: 0, y: 1, direction: :S)
-    end
+        expect(location).to eq(x: 1, y: 0, direction: :E)
+      end
 
-    it 'can move from (0,0) to (0,1) and then to (0,2)' do
-      rover = Rover.new(0, 0, :S)
-      rover.move(['f', 1], ['f', 1])
-      location = rover.position
+      it 'can move from (1,0) to (0,0) facing east' do
+        rover = Rover.new(1, 0, :S)
+        rover.turn('l')
+        rover.move(['b', 1])
+        location = rover.position
 
-      expect(location).to eq(x: 0, y: 2, direction: :S)
-    end
+        expect(location).to eq(x: 0, y: 0, direction: :E)
+      end
 
-    it 'can move from (0,0) to (0,3)' do
-      rover = Rover.new(0, 0, :S)
-      rover.move(['f', 1], ['f', 2])
-      location = rover.position
+      it 'can move from (2,2) to (2,1) facing west' do
+        rover = Rover.new(2, 2, :S)
+        rover.turn('r')
+        rover.move(['f', 1])
+        location = rover.position
 
-      expect(location).to eq(x: 0, y: 3, direction: :S)
-    end
+        expect(location).to eq(x: 1, y: 2, direction: :W)
+      end
 
-    it 'can move from (0,3) back to (0,2)' do
-      rover = Rover.new(0, 0, :S)
-      rover.move(['f', 1], ['f', 2], ['b', 1])
-      location = rover.position
+      it 'can move from (2,2) to (0,0) facing north' do
+        rover = Rover.new(2, 2, :S)
+        rover.turn('r')
+        rover.turn('r')
+        rover.move(['f', 2])
+        rover.turn('l')
+        rover.move(['f', 2])
+        rover.turn('r')
+        location = rover.position
 
-      expect(location).to eq(x: 0, y: 2, direction: :S)
-    end
-
-    it 'can move from (0,3) back to (0,0)' do
-      rover = Rover.new(0, 0, :S)
-      rover.move(['f', 1], ['f', 1], ['f', 1], ['b', 3])
-      location = rover.position
-
-      expect(location).to eq(x: 0, y: 0, direction: :S)
+        expect(location).to eq(x: 0, y: 0, direction: :N)
+      end
     end
   end
 
