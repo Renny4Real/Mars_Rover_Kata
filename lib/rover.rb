@@ -32,6 +32,14 @@ class Rover
       @axis[:direction] = :W
     elsif chirality == 'l' && @axis.has_value?(:W)
       @axis[:direction] = :S
+    elsif chirality == 'r' && @axis.has_value?(:S)
+      @axis[:direction] = :W
+    elsif chirality == 'r' && @axis.has_value?(:W)
+      @axis[:direction] = :N
+    elsif chirality == 'r' && @axis.has_value?(:N)
+      @axis[:direction] = :E
+    elsif chirality == 'r' && @axis.has_value?(:E)
+      @axis[:direction] = :S
     end
   end
 
