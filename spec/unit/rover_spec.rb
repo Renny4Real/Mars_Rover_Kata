@@ -51,41 +51,86 @@ describe Rover do
 
   context 'it can turn left or right' do
 
-    it 'can change from facing the south to facing the east' do
-      rover = Rover.new(0, 0, :S)
-      rover.turn('l')
-      rover.move(['f' , 0])
-      location = rover.position
+    context 'turn left' do
+
+      it 'can change from facing the south to facing the east' do
+        rover = Rover.new(0, 0, :S)
+        rover.turn('l')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :E)
+      end
+
+      it 'can change from facing the east to facing the north' do
+        rover = Rover.new(0, 0, :E)
+        rover.turn('l')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :N)
+      end
+
+      it 'can change from facing the north to facing the west' do
+        rover = Rover.new(0, 0, :N)
+        rover.turn('l')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :W)
+      end
+
+      it 'can change from facing the west to facing the south' do
+        rover = Rover.new(0, 0, :W)
+        rover.turn('l')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :S)
+      end
       
-      expect(location).to eq(x: 0, y: 0, direction: :E)
     end
 
-    it 'can change from facing the east to facing the north' do
-      rover = Rover.new(0, 0, :E)
-      rover.turn('l')
-      rover.move(['f' , 0])
-      location = rover.position
-      
-      expect(location).to eq(x: 0, y: 0, direction: :N)
+    context 'turn right' do
+
+      it 'can change from facing the south to facing the west' do
+        rover = Rover.new(0, 0, :S)
+        rover.turn('r')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :W)
+      end
+
+      it 'can change from facing the west to facing the north' do
+        rover = Rover.new(0, 0, :W)
+        rover.turn('r')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :N)
+      end
+
+      it 'can change from facing the north to facing the east' do
+        rover = Rover.new(0, 0, :N)
+        rover.turn('r')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :E)
+      end
+
+      it 'can change from facing the east to facing the south' do
+        rover = Rover.new(0, 0, :E)
+        rover.turn('r')
+        rover.move(['f' , 0])
+        location = rover.position
+        
+        expect(location).to eq(x: 0, y: 0, direction: :S)
+      end
+
     end
 
-    it 'can change from facing the north to facing the west' do
-      rover = Rover.new(0, 0, :N)
-      rover.turn('l')
-      rover.move(['f' , 0])
-      location = rover.position
-      
-      expect(location).to eq(x: 0, y: 0, direction: :W)
-    end
-
-    it 'can change from facing the west to facing the south' do
-      rover = Rover.new(0, 0, :W)
-      rover.turn('l')
-      rover.move(['f' , 0])
-      location = rover.position
-      
-      expect(location).to eq(x: 0, y: 0, direction: :S)
-    end
   end
 
 end
