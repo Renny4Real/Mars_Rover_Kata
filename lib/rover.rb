@@ -16,7 +16,7 @@ class Rover
     movement_commands.each do |movement_command|
       movement = movement_command[0]
       spaces = movement_command[1]
-      relevant_move_sequence(spaces,movement)
+      relevant_move_sequence(spaces, movement)
     end
     @axis
   end
@@ -28,29 +28,29 @@ class Rover
 
   private
 
-  def relevant_move_sequence(spaces,movement)
-    move_north?(spaces,movement)
-    move_south?(spaces,movement)
-    move_east?(spaces,movement)
-    move_left?(spaces,movement)
+  def relevant_move_sequence(spaces, movement)
+    move_north?(spaces, movement)
+    move_south?(spaces, movement)
+    move_east?(spaces, movement)
+    move_left?(spaces, movement)
   end
 
-  def move_north?(spaces,movement)
+  def move_north?(spaces, movement)
     @axis[:y] -= spaces if movement == 'f' && @axis.value?(:N)
     @axis[:y] += spaces if movement == 'b' && @axis.value?(:N)
   end
 
-  def move_south?(spaces,movement)
+  def move_south?(spaces, movement)
     @axis[:y] += spaces if movement == 'f' && @axis.value?(:S)
     @axis[:y] -= spaces if movement == 'b' && @axis.value?(:S)
   end
 
-  def move_east?(spaces,movement)
+  def move_east?(spaces, movement)
     @axis[:x] += spaces if movement == 'f' && @axis.value?(:E)
     @axis[:x] -= spaces if movement == 'b' && @axis.value?(:E)
   end
 
-  def move_left?(spaces,movement)
+  def move_left?(spaces, movement)
     @axis[:x] -= spaces if movement == 'f' && @axis.value?(:W)
     @axis[:x] += spaces if movement == 'b' && @axis.value?(:W)
   end
