@@ -1,10 +1,11 @@
-class Rover
+# frozen_string_literal: true
 
-  def initialize(x_coordinate,y_coordinate, orientation)
+class Rover
+  def initialize(x_coordinate, y_coordinate, orientation)
     @x_coordinate = x_coordinate
     @y_coordinate = y_coordinate
     @orientation = orientation
-    @axis = {x: @x_coordinate, y: @y_coordinate, direction: @orientation}
+    @axis = { x: @x_coordinate, y: @y_coordinate, direction: @orientation }
   end
 
   def position
@@ -15,21 +16,19 @@ class Rover
     movement_commands.each do |movement_command|
       movement = movement_command[0]
       spaces = movement_command[1]
-      turn = movement_command[2]
-      @axis[:y] += spaces if movement == 'f' && @axis.has_value?(:S)
-      @axis[:y] -= spaces if movement == 'b' && @axis.has_value?(:S)
-      @axis
+      @axis[:y] += spaces if movement == 'f' && @axis.value?(:S)
+      @axis[:y] -= spaces if movement == 'b' && @axis.value?(:S)
     end
     @axis
   end
 
   def turn(chirality)
-    turn_left if chirality == 'l' 
-    turn_right if chirality == 'r' 
+    turn_left if chirality == 'l'
+    turn_right if chirality == 'r'
   end
 
   private
-  
+
   def turn_left
     case @axis[:direction]
     when :S
@@ -59,7 +58,4 @@ class Rover
       @axis
     end
   end
-
 end
-
-
