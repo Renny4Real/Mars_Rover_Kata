@@ -18,7 +18,6 @@ class Rover
       spaces = movement_command[1]
       relevant_move_sequence(movement, spaces)
     end
-    @axis
   end
 
   def turn(chirality)
@@ -65,8 +64,6 @@ class Rover
       @axis[:direction] = :West
     when :West
       @axis[:direction] = :South
-    else
-      @axis
     end
   end
 
@@ -80,8 +77,6 @@ class Rover
       @axis[:direction] = :East
     when :East
       @axis[:direction] = :South
-    else
-      @axis
     end
   end
 end
