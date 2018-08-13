@@ -16,55 +16,55 @@ class Rover
     movement_commands.each do |movement_command|
       movement = movement_command[0]
       spaces = movement_command[1]
-      relevant_move_sequence(spaces, movement)
+      relevant_move_sequence(movement, spaces)
     end
     @axis
   end
 
   def turn(chirality)
-    turn_left if chirality == 'l'
-    turn_right if chirality == 'r'
+    turn_left if chirality == :left
+    turn_right if chirality == :right
   end
 
   private
 
-  def relevant_move_sequence(spaces, movement)
-    move_north?(spaces, movement)
-    move_south?(spaces, movement)
-    move_east?(spaces, movement)
-    move_left?(spaces, movement)
+  def relevant_move_sequence(movement, spaces)
+    move_north(movement, spaces)
+    move_south(movement, spaces)
+    move_east(movement, spaces)
+    move_left(movement, spaces)
   end
 
-  def move_north?(spaces, movement)
-    @axis[:y] -= spaces if movement == 'f' && @axis.value?(:N)
-    @axis[:y] += spaces if movement == 'b' && @axis.value?(:N)
+  def move_north(movement, spaces)
+    @axis[:y] -= spaces if movement == :forward && @axis.value?(:North)
+    @axis[:y] += spaces if movement == :backward && @axis.value?(:North)
   end
 
-  def move_south?(spaces, movement)
-    @axis[:y] += spaces if movement == 'f' && @axis.value?(:S)
-    @axis[:y] -= spaces if movement == 'b' && @axis.value?(:S)
+  def move_south(movement, spaces)
+    @axis[:y] += spaces if movement == :forward && @axis.value?(:South)
+    @axis[:y] -= spaces if movement == :backward && @axis.value?(:South)
   end
 
-  def move_east?(spaces, movement)
-    @axis[:x] += spaces if movement == 'f' && @axis.value?(:E)
-    @axis[:x] -= spaces if movement == 'b' && @axis.value?(:E)
+  def move_east(movement, spaces)
+    @axis[:x] += spaces if movement == :forward && @axis.value?(:East)
+    @axis[:x] -= spaces if movement == :backward && @axis.value?(:East)
   end
 
-  def move_left?(spaces, movement)
-    @axis[:x] -= spaces if movement == 'f' && @axis.value?(:W)
-    @axis[:x] += spaces if movement == 'b' && @axis.value?(:W)
+  def move_left(movement, spaces)
+    @axis[:x] -= spaces if movement == :forward && @axis.value?(:West)
+    @axis[:x] += spaces if movement == :backward && @axis.value?(:West)
   end
 
   def turn_left
     case @axis[:direction]
-    when :S
-      @axis[:direction] = :E
-    when :E
-      @axis[:direction] = :N
-    when :N
-      @axis[:direction] = :W
-    when :W
-      @axis[:direction] = :S
+    when :South
+      @axis[:direction] = :East
+    when :East
+      @axis[:direction] = :North
+    when :North
+      @axis[:direction] = :West
+    when :West
+      @axis[:direction] = :South
     else
       @axis
     end
@@ -72,14 +72,14 @@ class Rover
 
   def turn_right
     case @axis[:direction]
-    when :S
-      @axis[:direction] = :W
-    when :W
-      @axis[:direction] = :N
-    when :N
-      @axis[:direction] = :E
-    when :E
-      @axis[:direction] = :S
+    when :South
+      @axis[:direction] = :West
+    when :West
+      @axis[:direction] = :North
+    when :North
+      @axis[:direction] = :East
+    when :East
+      @axis[:direction] = :South
     else
       @axis
     end
