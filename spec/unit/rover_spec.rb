@@ -2,7 +2,7 @@
 
 describe Rover do
   context 'it can move forwards and backwards' do
-    context 'move along the y - axis' do
+    context 'can move along the y - axis' do
       it 'can return its current position at (O,O) facing south' do
         rover = Rover.new(0, 0, :South)
         location = rover.position
@@ -54,7 +54,7 @@ describe Rover do
       end
     end
 
-    context 'move along the x - axis' do
+    context 'can move along the x - axis' do
       it 'can move from (0,0) to (1,0) facing east' do
         rover = Rover.new(0, 0, :South)
         rover.turn(:left)
@@ -98,7 +98,7 @@ describe Rover do
   end
 
   context 'it can turn left or right' do
-    context 'turn left' do
+    context 'can turn left' do
       it 'can change from facing the south to facing the east' do
         rover = Rover.new(0, 0, :South)
         rover.turn(:left)
@@ -136,7 +136,7 @@ describe Rover do
       end
     end
 
-    context 'turn right' do
+    context 'can turn right' do
       it 'can change from facing the south to facing the west' do
         rover = Rover.new(0, 0, :South)
         rover.turn(:right)
